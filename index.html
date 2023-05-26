@@ -1,1 +1,34 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Check Grade</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/js-sha256/0.9.0/sha256.min.js"></script>
+    <script>
+    var grades = {
+        // 这里存储的是识别码的哈希值和对应的成绩
+        [sha256('123456')]: 95,
+        [sha256('234567')]: 90,
+        [sha256('345678')]: 88,
+        // 其他识别码和成绩...
+    };
+
+    function checkGrade() {
+        var uniqueID = document.getElementById('unique_id').value;
+        var hashedID = sha256(uniqueID);
+        var grade = grades[hashedID];
+        if (grade) {
+            document.getElementById('result').textContent = 'Your grade is: ' + grade;
+        } else {
+            document.getElementById('result').textContent = 'Invalid unique ID.';
+        }
+    }
+    </script>
+</head>
+<body>
+    <label for="unique_id">Enter your unique ID:</label>
+    <input type="text" id="unique_id">
+    <button onclick="checkGrade()">Check Grade</button>
+    <p id="result"></p>
+</body>
+</html>
 
